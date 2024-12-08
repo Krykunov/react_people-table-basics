@@ -29,7 +29,6 @@ export const App = () => {
         </div>
       </nav>
 
-      <main className="section"></main>
       <div className="section">
         <Outlet />
       </div>

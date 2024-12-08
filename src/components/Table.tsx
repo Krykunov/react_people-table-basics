@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import TableRow from './TableRow';
 import { Person, PersonFields } from '../types';
+import PersonLink from './PersonLink';
 
 type Props = {
   people: Person[];
@@ -22,7 +22,7 @@ const Table: FC<Props> = ({ people }) => {
 
       <tbody>
         {people.map(person => (
-          <TableRow key={person.slug} person={person} />
+          <PersonLink key={person.slug} person={person} />
         ))}
       </tbody>
     </table>

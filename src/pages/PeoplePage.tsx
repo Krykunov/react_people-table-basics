@@ -6,7 +6,7 @@ import { usePeople } from '../hooks/usePeople';
 const PeoplePage = () => {
   const { people, isPeopleLoading, isPeopleError } = usePeople();
 
-  let status = 'loading'; // Default state is loading
+  let status = 'loading';
 
   if (isPeopleError) {
     status = 'error';
