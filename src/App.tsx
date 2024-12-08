@@ -1,16 +1,13 @@
-import { Loader } from './components/Loader';
-
+import classNames from 'classnames';
 import './App.scss';
-import Table from './components/Table';
-import { usePeople } from './hooks/usePeople';
+import { NavLink, Outlet } from 'react-router-dom';
+
+const getLinkClass = ({ isActive }: { isActive: boolean }) =>
+  classNames('navbar-item', {
+    'has-background-grey-lighter': isActive,
+  });
 
 export const App = () => {
-  const { people, isPeopleLoading, isPeopleError } = usePeople();
-  const isPeople = people.length > 0;
-  const isPeopleShown = isPeople && !isPeopleError && !isPeopleLoading;
-
-  const isEmptyMessageShown = !isPeople && !isPeopleError && !isPeopleLoading;
-
   return (
     <div data-cy="app">
       <nav
@@ -21,47 +18,21 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <a className="navbar-item" href="#/">
+            <NavLink className={getLinkClass} to="/">
               Home
-            </a>
+            </NavLink>
 
-            <a
-              className="navbar-item has-background-grey-lighter"
-              href="#/people"
-            >
+            <NavLink className={getLinkClass} to="/people">
               People
-            </a>
+            </NavLink>
           </div>
         </div>
       </nav>
 
-      <main className="section">
-        <div className="container">
-          <h1 className="title">Home Page</h1>
-          <h1 className="title">People Page</h1>
-          <h1 className="title">Page not found</h1>
-
-          <div className="block">
-            <div className="box table-container">
-              {isPeopleLoading && <Loader />}
-
-              {isPeopleError && (
-                <p data-cy="peopleLoadingError" className="has-text-danger">
-                  Something went wrong
-                </p>
-              )}
-
-              {isEmptyMessageShown && (
-                <p data-cy="noPeopleMessage">
-                  There are no people on the server
-                </p>
-              )}
-
-              {isPeopleShown && <Table people={people} />}
-            </div>
-          </div>
-        </div>
-      </main>
+      <main className="section"></main>
+      <div className="section">
+        <Outlet />
+      </div>
     </div>
   );
 };

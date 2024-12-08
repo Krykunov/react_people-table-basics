@@ -7,8 +7,6 @@ type Props = {
 };
 
 const Table: FC<Props> = ({ people }) => {
-  console.log(people);
-
   return (
     <table
       data-cy="peopleTable"
